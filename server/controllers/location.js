@@ -1,5 +1,3 @@
-// utils
-import makeValidation from '@withvoid/make-validation';
 // models
 import LocationModel from '../models/Location.js';
 
@@ -22,15 +20,6 @@ export default {
   },
   onCreateLocation: async (req, res) => { 
     try {
-      const validation = makeValidation(types => ({
-        payload: req.body,
-        checks: {
-          latitude: { type: types.string },
-          longitude: { type: types.string },
-        }
-      }));
-      if (!validation.success) return res.status(400).json(validation);
-
       const { latitude, longitude } = req.body;
       const location = await LocationModel.createLocation(latitude, longitude);
       return res.status(200).json({ success: true, location });
