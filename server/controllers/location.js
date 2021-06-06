@@ -1,5 +1,6 @@
 // models
 import LocationModel from '../models/Location.js';
+import client from '../index.js';
 
 export default {
   onGetAllLocations: async (req, res) => {
@@ -20,8 +21,11 @@ export default {
   },
   onCreateLocation: async (req, res) => { 
     try {
+      console.log('onCreateLocation')
       const { latitude, longitude } = req.body;
       const location = await LocationModel.createLocation(latitude, longitude);
+      client.emit("location", [latitude, longitude]);
+      console.log('from location backend server:',[latitude, longitude])
       return res.status(200).json({ success: true, location });
     } catch (error) {
       return res.status(500).json({ success: false, error: error })
