@@ -21,10 +21,12 @@ export default {
   },
   onCreateLocation: async (req, res) => { 
     try {
-      console.log('onCreateLocation')
+      console.log('onCreateLocation', req.body)
       const { latitude, longitude } = req.body;
+      console.log( 'latitude', latitude)
       const location = await LocationModel.createLocation(latitude, longitude);
-      client.emit("location", [latitude, longitude]);
+      console.log('location', location)
+      // client.emit("location", [latitude, longitude]);
       console.log('from location backend server:',[latitude, longitude])
       return res.status(200).json({ success: true, location });
     } catch (error) {
