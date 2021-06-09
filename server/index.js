@@ -24,7 +24,7 @@ function onNewWebsocketConnection(socket) {
   });
 }
 
-// function startServer() {
+function startServer() {
   // create a new express app
   const app = express();
   // create http server and wrap the express app
@@ -37,10 +37,6 @@ function onNewWebsocketConnection(socket) {
     }
   });
 
-  // app.use((req, res, next) => {
-  //   res.header("Access-Control-Allow-Origin", "http://localhost");
-  //   next();
-  // });
   app.set("port", port);
   app.use(cors());
   app.use(logger("dev"));
@@ -71,9 +67,9 @@ function onNewWebsocketConnection(socket) {
       console.error(e);
     }
   });
-// }
+}
 
-// startServer();
+startServer();
 export default client;
 // Original line 8 in package.json
 // "start": "nodemon server/index.js",
